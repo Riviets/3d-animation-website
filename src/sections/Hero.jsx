@@ -2,8 +2,38 @@ import React from 'react'
 import { words } from '../constants'
 import Button from '../components/Button'
 import HeroExperience from '../components/HeroModels/HeroExperience'
+import gsap from "gsap"
+import { useGSAP } from '@gsap/react'
+import AnimaterdCounter from '../components/AnimaterdCounter'
 
 const Hero = () => {
+
+   useGSAP(()=>{
+    let timeline = gsap.timeline()
+
+    timeline.fromTo('.hero-text h1', {
+        y: 50,
+        opacity: 0
+    },
+    {
+        y:0,
+        opacity:1,
+        stagger: 0.2,
+        duration: 1,
+        ease: 'power2.inOut'
+    })
+    timeline.from('#text', {
+        x: -40,
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power1.out'
+    })
+    timeline.from('#button', {
+        opacity: 0,
+        duration: 1.5,
+        ease: 'power1.out'
+    }, '<')
+   })
 
   return (
     <section id='hero' className='relative overflow-hidden'>
@@ -39,6 +69,7 @@ const Hero = () => {
                 </div>
             </figure>
         </div>
+        <AnimaterdCounter />
     </section>
   )
 }
